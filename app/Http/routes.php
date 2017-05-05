@@ -34,26 +34,27 @@ $app->get('/shops', 'ShopsController@index');
 $app->get('/shops/{id}', 'ShopsController@read');
 $app->get('/shops/delete/{id}', 'ShopsController@delete');
 $app->post('/shops', 'ShopsController@create');
-$app->post('/shops/update/{id}', 'ShopsController@update');
+$app->post('/shops/update/{shopID}', 'ShopsController@update');
 
 
-/* Route item ads */
-$app->get('/item_ads', 'ItemAdsController@index');
-$app->get('/item_ads/{id}', 'ItemAdsController@read');
-$app->get('/item_ads/delete/{id}', 'ItemAdsController@delete');
-$app->post('/item_ads/create', 'ItemAdsController@create');
-$app->post('/item_ads/update/{id}', 'ItemAdsController@update');
+/* Route sent campaigns */
+$app->get('/sentcampaigns', 'SentCampaignController@index');
+$app->get('/sentcampaigns/{id}', 'SentCampaignController@read');
+$app->get('/sentcampaigns/delete/{id}', 'SentCampaignController@delete');
+$app->post('/sentcampaigns/create', 'SentCampaignController@create');
+$app->post('/sentcampaigns/update/{id}', 'SentCampaignController@update');
 
 
+/* Route sent campaigns */
+$app->get('/activecampaigns', 'ActiveCampaignController@index');
+$app->get('/activecampaigns/{id}', 'ActiveCampaignController@read');
+$app->get('/activecampaigns/delete/{id}', 'ActiveCampaignController@delete');
+$app->post('/activecampaigns/create', 'ActiveCampaignController@create');
+$app->post('/activecampaigns/update/{id}', 'ActiveCampaignController@update');
 
-/*
- | ------------------------------------------
- | Movie API for entertainment
- | ------------------------------------------
- */
-$app->get('/movie', 'MovieController@index');
-$app->get('/movie/category/{category_name}', 'MovieController@movie_category');
-$app->get('/movie/category_list', 'MovieController@lis_category');
-$app->get('/movie/tv_show', 'TvShowController@index');
-$app->get('/movie/tv_show/{id_movie}', 'TvShowController@tvshow_movie_id');
-$app->get('/movie/tv_show/show/{id}', 'TvShowController@tvshow_id');
+/* Route sent campaigns */
+$app->get('/expiredcampaigns', 'ExpiredCampaignController@index');
+$app->get('/expiredcampaigns/{id}', 'ExpiredCampaignController@read');
+$app->get('/expiredcampaigns/delete/{id}', 'ExpiredCampaignController@delete');
+$app->post('/expiredcampaigns/create', 'ExpiredCampaignController@create');
+$app->post('/expiredcampaigns/update/{id}', 'ExpiredCampaignController@update');

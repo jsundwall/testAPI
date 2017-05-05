@@ -13,10 +13,16 @@ class CreateCategoryMoviesTable extends Migration
      */
     public function up()
     {
-        Schema::create('category_movies', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name');
-            $table->timestamps();
+        Schema::create('expiredCampaigns', function (Blueprint $table) {
+          $table->increments('campaignID');
+          $table->string('title');
+          $table->string('image');
+          $table->string('description');
+          $table->dateTime('dateStarts');
+          $table->dateTime('dateEnds');
+          $table->integer('shopID')->unsigned();
+          $table->foreign('shopID')->references('shopID')->on('shops');
+          $table->timestamps();
         });
     }
 
@@ -27,6 +33,6 @@ class CreateCategoryMoviesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('category_movies');
+        Schema::drop('expiredCampaigns');
     }
 }

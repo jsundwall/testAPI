@@ -13,17 +13,16 @@ class CreateMoviesTable extends Migration
      */
     public function up()
     {
-        Schema::create('movies', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('title');
-            $table->string('poster');
-            $table->string('picture');
-            $table->text('description');
-            $table->integer('ratings');
-            $table->string('url_trailer');
-            $table->integer('category_id');
-            $table->integer('type');
-            $table->timestamps();
+        Schema::create('activeCampaigns', function (Blueprint $table) {
+          $table->increments('campaignID');
+          $table->string('title');
+          $table->string('image');
+          $table->string('description');
+          $table->dateTime('dateStarts');
+          $table->dateTime('dateEnds');
+          $table->integer('shopID')->unsigned();
+          $table->foreign('shopID')->references('shopID')->on('shops');
+          $table->timestamps();
         });
     }
 
@@ -34,6 +33,6 @@ class CreateMoviesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('movies');
+        Schema::drop('activeCampaigns');
     }
 }

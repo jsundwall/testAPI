@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\ItemAds;
+use App\SentCampaigns;
 
-class ItemAdsController extends Controller
+class SentCampaignController extends Controller
 {
 
     /**
@@ -23,58 +23,55 @@ class ItemAdsController extends Controller
      */
     public function index(Request $request)
     {
-      $item_ads = ItemAds::where('published', true)->get();
-      if (count($item_ads) !== 0) {
-          $res['success'] = true;
-          $res['result'] = $item_ads;
+      $sentCampaigns = new SentCampaigns;
 
-          return response($res);
-      }else{
-          $res['success'] = true;
-          $res['result'] = 'No ads have been published!';
+      if($sentCampaigns !== null) {
+        $res['success'] = true;
+        $res['result'] = $sentCampaigns->all();
 
-          return response($res);
+        return $res;
+      } else {
+            $res['success'] = true;
+            $res['result'] = 'No campaign proposals';
+
+            return response($res);
       }
 
     }
 
     /**
-     * Insert database for ItemAds
+     * Insert database for SentCampaigns
      * Url : /item_ads
      */
     public function create(Request $request)
     {
-      $item_ads = new ItemAds;
-      $item_ads->fill([
-        'user_id' => $request->input('user_id'),
-        'category_id' => $request->input('category_id'),
+      $sentCampaigns = new SentCampaigns;
+      $sentCampaigns->fill([
         'title' => $request->input('title'),
-        'price' => $request->input('price'),
+        'image' => $request->input('image'),
         'description' => $request->input('description'),
-        'picture' => $request->input('picture'),
-        'no_hp' => $request->input('no_hp'),
-        'city' => $request->input('city'),
-        'sold' => false,
-        'published'=> true
+        'dateStarts' => $request->input('dateStarts'),
+        'dateEnds' => $request->input('dateEnds'),
+        'shopID' => $request->input('shopID'),
       ]);
-      if($item_ads->save()){
+      if($sentCampaigns->save()){
         $res['success'] = true;
-        $res['result'] = 'Success add new item_ads!';
+        $res['result'] = 'Successfully sent new campaign proposal!';
 
         return response($res);
       }
     }
 
     /**
-     * Get one data ItemAds by id
+     * Get one data SentCampaigns by id
      * Url : /item_ads/{id}
      */
     public function read(Request $request, $id)
     {
-      $item_ads = ItemAds::where('id',$id)->first();
-      if ($item_ads !== null) {
+      $sentCampaigns = SentCampaigns::find($id)->first();
+      if ($sentCampaigns !== null) {
         $res['success'] = true;
-        $res['result'] = $item_ads;
+        $res['result'] = $sentCampaigns;
 
         return response($res);
       }else{
@@ -86,17 +83,17 @@ class ItemAdsController extends Controller
     }
 
     /**
-     * Update data ItemAds by ud
+     * Update data SentCampaigns by ud
      * Url : /item_ads/udpate/{id}
      */
     public function update(Request $request, $id)
     {
-      if ($request->has('name')) {
-          $item_ads = ItemAds::find($id);
-          $item_ads->name = $request->input('name');
-          if ($item_ads->save()) {
+      if ($request->has('title')) {
+          $sentCampaigns = SentCampaigns::find($id);
+          $sentCampaigns->title = $request->input('title');
+          if ($sentCampaigns->save()) {
               $res['success'] = true;
-              $res['result'] = 'Success update '.$request->input('name');
+              $res['result'] = 'Success update '.$request->input('title');
 
               return response($res);
           }
@@ -109,12 +106,12 @@ class ItemAdsController extends Controller
     }
 
     /**
-     * Delete data ItemAds by id
+     * Delete data SentCampaigns by id
      */
     public function delete(Request $request, $id)
     {
-      $item_ads = ItemAds::find($id);
-      if ($item_ads->delete($id)) {
+      $sentCampaigns = SentCampaigns::find($id);
+      if ($sentCampaigns->delete($id)) {
           $res['success'] = true;
           $res['result'] = 'Success delete item_ads!';
 

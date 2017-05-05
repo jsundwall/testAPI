@@ -13,19 +13,16 @@ class CreateItemAdsTable extends Migration
      */
     public function up()
     {
-        Schema::create('item_ads', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('user_id');
-            $table->integer('category_id');
-            $table->string('title');
-            $table->integer('price');
-            $table->string('description');
-            $table->string('picture');
-            $table->integer('no_hp');
-            $table->string('city');
-            $table->boolean('sold');
-            $table->boolean('published');
-            $table->timestamps();
+        Schema::create('sentCampaigns', function (Blueprint $table) {
+          $table->increments('campaignID');
+          $table->string('title');
+          $table->string('image');
+          $table->string('description');
+          $table->dateTime('dateStarts');
+          $table->dateTime('dateEnds');
+          $table->integer('shopID')->unsigned();
+          $table->foreign('shopID')->references('shopID')->on('shops');
+          $table->timestamps();
         });
     }
 
@@ -36,6 +33,6 @@ class CreateItemAdsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('item_ads');
+        Schema::drop('sentCampaigns');
     }
 }

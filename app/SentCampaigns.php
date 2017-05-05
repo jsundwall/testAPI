@@ -7,13 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Model item ads
  */
-class ItemAds extends Model
+class SentCampaigns extends Model
 {
-
+  protected $primaryKey = 'campaignID';
   /**
    * Table database
    */
-  protected $table = 'item_ads';
+  protected $table = 'sentCampaigns';
 
   /**
    * The attributes that are mass assignable.
@@ -21,14 +21,14 @@ class ItemAds extends Model
    * @var array
    */
   protected $fillable = [
-    'user_id','category_id','title','price','description','picture','no_hp','city','sold','published',
+    'title','image','description','dateStarts','dateEnds','shopID',
   ];
 
   /**
    * One to one relationships
    */
-  public function category()
+  public function shop()
   {
-    return $this->hasOne('App\CategoryAds');
+    return $this->hasOne('App\Shops');
   }
 }

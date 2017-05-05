@@ -26,7 +26,7 @@ class ShopsController extends Controller
       $shops = new Shops;
 
       $res['success'] = true;
-      $res['result'] = shops->all();
+      $res['result'] = $shops->all();
 
       return response($res);
     }
@@ -41,7 +41,7 @@ class ShopsController extends Controller
       $shops->fill(['storeName' => $request->input('storeName')]);
       if($shops->save()){
         $res['success'] = true;
-        $res['result'] = 'Success add new shop!';
+        $res['result'] = 'Successfully added new shop!';
 
         return response($res);
       }
@@ -52,9 +52,9 @@ class ShopsController extends Controller
      * Get one shop by id
      * Url : /shop/{id}
      */
-    public function read(Request $request, $id)
+    public function read(Request $request, $shopID)
     {
-      $shops = Shops::where('id',$id)->first();
+      $shops = Shops::where('shopID',$shopID)->first();
       if ($shops !== null) {
         $res['success'] = true;
         $res['result'] = $shops;
@@ -71,10 +71,10 @@ class ShopsController extends Controller
     /**
      * Update data CategoryAds by ud
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $shopID)
     {
       if ($request->has('storeName')) {
-          $shops = Shops::find($id);
+          $shops = Shops::find($shopID);
           $shops->storeName = $request->input('storeName');
           if ($shops->save()) {
               $res['success'] = true;
@@ -93,12 +93,12 @@ class ShopsController extends Controller
     /**
      * Delete shops by id
      */
-    public function delete(Request $request, $id)
+    public function delete(Request $request, $shopID)
     {
-      $shops = Shops::find($id);
-      if ($shops->delete($id)) {
+      $shops = Shops::find($shopID);
+      if ($shops->delete($shopID)) {
           $res['success'] = true;
-          $res['result'] = 'Success deleted shop!';
+          $res['result'] = 'Successfully deleted shop!';
 
           return response($res);
       }

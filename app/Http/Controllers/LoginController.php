@@ -28,7 +28,7 @@ class LoginController extends Controller
         }else{
             if ($hasher->check($password, $login->password)) {
                 $api_token = sha1(time());
-                $create_token = User::where('id', $login->id)->update(['api_token' => $api_token]);
+                $create_token = User::where('userID', $login->userID)->update(['api_token' => $api_token]);
                 if ($create_token) {
                     $res['success'] = true;
                     $res['api_token'] = $api_token;

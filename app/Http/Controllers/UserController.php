@@ -21,11 +21,15 @@ class UserController extends Controller
         $username = $request->input('username');
         $email = $request->input('email');
         $password = $hasher->make($request->input('password'));
+        $userRole = $request->input('userRole');
+        $shopID = $request->input('shopID');
 
         $register = User::create([
             'username'=> $username,
             'email'=> $email,
             'password'=> $password,
+            'userRole'=> $userRole,
+            'shopID'=> $shopID,
         ]);
 
         if ($register) {
